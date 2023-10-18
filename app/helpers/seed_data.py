@@ -7,7 +7,7 @@ def process():
     seeder = Seed.seeder()
     roles = tuple(role[1] for role in Employee.EMPLOYEE_TYPES[:-1])
 
-    seeder.add_entity(Employee, 15, {
+    seeder.add_entity(Employee, 50000, {
         'full_name': lambda x: seeder.faker.name(),
         'position': lambda x: random.choice(roles),
         'hire_date': lambda x: seeder.faker.date_time_this_decade(),
