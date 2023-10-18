@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Hierarchy</title>
+    <!-- Подключение Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Employee Hierarchy (Tree of Subordinates)</h1>
+
+        <ul class="list-unstyled mt-3">
+            {% for first in hierarchy %}
+                <li>
+                    <br>
+                    <br>
+                    {{ first.employee.full_name }} ({{ first.employee.position }})
+                    {% if first.subordinates %}
+                        <ul class="ml-4">
+                            {% for second in first.subordinates %}
+                                <li>
+                                    {{ second.employee.full_name }} ({{ second.employee.position }})
+                                    {% if second.subordinates %}
+                                        <ul class="ml-4">
+                                            {% for third in second.subordinates %}
+                                                <li>
+                                                    {{ third.employee.full_name }} ({{ third.employee.position }})
+                                                    {% if third.subordinates %}
+                                                        <ul class="ml-4">
+                                                            {% for fourth in third.subordinates %}
+                                                                <li>
+                                                                    {{ fourth.employee.full_name }} ({{ fourth.employee.position }})
+                                                                    {% if fourth.subordinates %}
+                                                                        <ul class="ml-4">
+                                                                            {% for last in fourth.subordinates %}
+                                                                                <li>
+                                                                                    {{ last.employee.full_name }} ({{ last.employee.position }})
+                                                                                </li>
+                                                                            {% endfor %}
+                                                                        </ul>
+                                                                    {% endif %}
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
