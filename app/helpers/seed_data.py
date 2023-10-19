@@ -23,18 +23,18 @@ def create_hierarchy():
     roles = dict(Employee.EMPLOYEE_TYPES)
 
     head = Employee.objects.first()
-    head.position = roles['HEAD']
+    head.position = roles['Head']
     head.save()
 
     for emp in employees:
-        if emp.position == roles['STD']:
-            emp.supervisor = random.choice(employees.filter(position=roles['MNG']))
-        elif emp.position == roles['MNG']:
-            emp.supervisor = random.choice(employees.filter(position=roles['SNR_MNG']))
-        elif emp.position == roles['SNR_MNG']:
-            emp.supervisor = random.choice(employees.filter(position=roles['EXC']))
-        elif emp.position == roles['EXC']:
-            emp.supervisor = random.choice(employees.filter(position=roles['HEAD']))
+        if emp.position == roles['Base employee']:
+            emp.supervisor = random.choice(employees.filter(position=roles['Manager']))
+        elif emp.position == roles['Manager']:
+            emp.supervisor = random.choice(employees.filter(position=roles['Senior manager']))
+        elif emp.position == roles['Senior manager']:
+            emp.supervisor = random.choice(employees.filter(position=roles['Executive']))
+        elif emp.position == roles['Executive']:
+            emp.supervisor = random.choice(employees.filter(position=roles['Head']))
 
         emp.save()
 
