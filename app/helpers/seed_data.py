@@ -26,16 +26,20 @@ def create_hierarchy():
     head.position = roles['Head']
     head.save()
 
+    supervisor = None
+    employees_to_update = []
+
     for emp in employees:
         if emp.position == roles['Base employee']:
-            emp.supervisor = random.choice(employees.filter(position=roles['Manager']))
+            supervisor = random.choice(employees.filter(position=roles['Manager']))
         elif emp.position == roles['Manager']:
-            emp.supervisor = random.choice(employees.filter(position=roles['Senior manager']))
+            supervisor = random.choice(employees.filter(position=roles['Senior manager']))
         elif emp.position == roles['Senior manager']:
-            emp.supervisor = random.choice(employees.filter(position=roles['Executive']))
+            supervisor = random.choice(employees.filter(position=roles['Executive']))
         elif emp.position == roles['Executive']:
-            emp.supervisor = random.choice(employees.filter(position=roles['Head']))
+            supervisor = random.choice(employees.filter(position=roles['Head']))
 
-        emp.save()
+        emp.supervisor = supervisor
+        employees_to_update.append(emp)
 
-
+    Employee.objects.bulk_update(employees_to_update, ['supervisor'])
