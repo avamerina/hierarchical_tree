@@ -1,6 +1,5 @@
 from datetime import datetime
 
-from django.utils import timezone
 from django.db import models
 
 
@@ -30,4 +29,4 @@ class Employee(models.Model):
 
     def __repr__(self):
         return self.__str__()
-    
+
