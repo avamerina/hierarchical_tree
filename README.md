@@ -68,6 +68,16 @@ body:
 }
 ```
 
+* positions change
+```
+POST /employees/ID/update_position/
+parameters: {"Authorization" : Token your_token}
+body:
+  {
+    "supervisor": 15
+  }
+
+```
 
   
 
